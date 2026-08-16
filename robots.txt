@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.eunmi-makeup.com/sitemap.xml
+Sitemap: https://kimeunmi.vercel.app/sitemap.xml
