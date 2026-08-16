@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>관리자 | 김은미 퍼스널컬러 메이크업</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --nude:#FBF5F3; --ink:#24244A; --indigo:#3B3E8C; --indigo-br:#5B60D6;
+    --pink:#EBB9C6; --gold:#C9A96A; --muted:#7C7690; --line:#ECE0E2;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--nude); color:var(--ink); font-family:"Noto Sans KR",sans-serif;
+    font-size:15.5px; line-height:1.7; word-break:keep-all; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 20px 80px;}
+  header{background:#fff; border-bottom:1px solid var(--line); padding:16px 0; margin-bottom:30px;}
+  header .wrap{padding-bottom:0; display:flex; align-items:center; justify-content:space-between;}
+  header h1{font-family:"Playfair Display","Noto Sans KR",serif; font-size:20px; margin:0;}
+  header h1 small{font-size:13px; color:var(--muted); font-weight:400; margin-left:8px;}
+  h2{font-size:18px; margin:0 0 6px;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin-bottom:20px; box-shadow:0 4px 14px rgba(90,60,90,.05);}
+  .card .desc{font-size:13.5px; color:var(--muted); margin:0 0 16px;}
+  .btn{display:inline-flex; align-items:center; gap:6px; border:none; border-radius:999px; padding:11px 22px;
+    font-size:14.5px; font-weight:600; font-family:inherit; cursor:pointer; transition:transform .15s, box-shadow .15s;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-grad{background:linear-gradient(120deg,#3B3E8C 0%,#5B60D6 45%,#8E63E6 100%); color:#fff; box-shadow:0 6px 18px rgba(91,72,214,.35);}
+  .btn-ghost{background:transparent; color:var(--indigo); border:1.4px solid var(--indigo);}
+  .btn-danger{background:#fff; color:#B5477A; border:1.4px solid #E5A8C2;}
+  .btn-sm{padding:6px 14px; font-size:13px;}
+  input[type=password], input[type=text]{padding:12px 16px; border:1px solid var(--line); border-radius:10px;
+    font-family:inherit; font-size:15px; width:100%; max-width:280px;}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  table{width:100%; border-collapse:collapse; font-size:14px;}
+  th, td{padding:10px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top;}
+  th{color:var(--muted); font-weight:600; font-size:12.5px;}
+  .empty{color:var(--muted); font-size:14px; padding:14px 0;}
+  .tag{display:inline-block; font-size:11.5px; color:var(--indigo); background:#fbe9ef; border-radius:20px; padding:2px 10px; font-weight:600;}
+  .stars{color:var(--gold); letter-spacing:2px; font-size:13px;}
+  .msg{font-size:13.5px; color:var(--indigo); margin-top:10px; display:none;}
+  #panel{display:none;}
+  .notice{background:#FFF9E8; border:1px solid #F0E2B8; border-radius:12px; padding:14px 18px; color:#8a7530; font-size:13px; margin-bottom:20px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media(max-width:680px){ .grid2{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>관리자 페이지<small>김은미 퍼스널컬러 메이크업</small></h1>
+    <a class="btn btn-ghost btn-sm" href="index-4.html">사이트 보기 &rarr;</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 로그인 -->
+  <div class="card" id="loginCard">
+    <h2>&#128274; 로그인</h2>
+    <p class="desc">관리자 비밀번호를 입력해 주세요. (비밀번호: <b>0813</b>)<br>
+      <span style="font-size:12.5px;">보안을 위해 이 페이지에 들어올 때마다 비밀번호를 다시 입력하셔야 합니다.</span></p>
+    <form id="loginForm" class="row">
+      <input type="password" id="pwInput" placeholder="비밀번호" autocomplete="current-password">
+      <button type="submit" class="btn btn-grad">로그인</button>
+    </form>
+    <p class="msg" id="loginMsg" style="color:#B5477A;">비밀번호가 올바르지 않습니다.</p>
+  </div>
+
+  <!-- 관리 패널 -->
+  <div id="panel">
+
+    <div class="notice">
+      &#128161; 여기서 저장한 수정 내용은 <b>지금 사용 중인 이 브라우저</b>에 저장됩니다.
+      다른 컴퓨터&middot;휴대폰에도 같은 내용을 보이게 하려면 아래 <b>백업 내보내기</b> 파일을 만들어 그 기기의 관리자 페이지에서 <b>복원</b>해 주세요.
+    </div>
+
+    <!-- 편집 모드 -->
+    <div class="card">
+      <h2>&#9999;&#65039; 사이트 내용&middot;사진 수정</h2>
+      <p class="desc">편집 모드를 열면 사이트 화면에서 <b>글자를 직접 클릭해서 고치고</b>, 사진 위의 &#128247; 버튼으로 <b>사진을 교체</b>할 수 있어요. 수정 후 하단의 '저장'을 꼭 눌러주세요.</p>
+      <div class="row">
+        <button class="btn btn-grad" data-edit="index-4.html">메인 페이지 편집 &rarr;</button>
+        <button class="btn btn-ghost" data-edit="personalcolor.html">퍼스널컬러 진단</button>
+        <button class="btn btn-ghost" data-edit="license.html">자격과정</button>
+        <button class="btn btn-ghost" data-edit="bodyline.html">골격진단</button>
+        <button class="btn btn-ghost" data-edit="class.html">1:1 클래스</button>
+        <button class="btn btn-ghost" data-edit="interview.html">면접&middot;승무원</button>
+        <button class="btn btn-ghost" data-edit="outreach.html">학교 출강</button>
+        <button class="btn btn-ghost" data-edit="wedding.html">웨딩&middot;본식</button>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <!-- 문의 목록 -->
+      <div class="card" style="margin-bottom:0;">
+        <h2>&#128172; 문의 목록 <span class="tag" id="inqCount"></span></h2>
+        <p class="desc">사이트의 '문의하기' 폼으로 접수된 내용입니다.</p>
+        <div id="inqList"></div>
+      </div>
+
+      <!-- 후기 관리 -->
+      <div class="card" style="margin-bottom:0;">
+        <h2>&#11088; 방문자 후기 관리 <span class="tag" id="revCount"></span></h2>
+        <p class="desc">방문자가 남긴 후기입니다. 부적절한 후기는 삭제할 수 있어요. (대표 후기 6개는 '편집 모드'에서 직접 수정)</p>
+        <div id="revList"></div>
+      </div>
+    </div>
+
+    <!-- 백업 -->
+    <div class="card" style="margin-top:20px;">
+      <h2>&#128190; 백업 &middot; 복원</h2>
+      <p class="desc">수정한 글&middot;사진&middot;후기&middot;문의를 파일 하나로 저장해 두거나, 다른 기기로 옮길 때 사용하세요.</p>
+      <div class="row">
+        <button class="btn btn-ghost" id="exportBtn">백업 내보내기 (파일 저장)</button>
+        <button class="btn btn-ghost" id="importBtn">백업 복원 (파일 불러오기)</button>
+        <input type="file" id="importFile" accept=".json" style="display:none;">
+      </div>
+      <p class="msg" id="backupMsg"></p>
+    </div>
+
+    <!-- 비밀번호 -->
+    <div class="card">
+      <h2>&#128273; 비밀번호 변경</h2>
+      <form id="pwForm" class="row">
+        <input type="password" id="newPw" placeholder="새 비밀번호" autocomplete="new-password">
+        <button type="submit" class="btn btn-ghost">변경</button>
+      </form>
+      <p class="msg" id="pwMsg">비밀번호가 변경되었습니다.</p>
+    </div>
+
+    <!-- 초기화 -->
+    <div class="card">
+      <h2>&#9888;&#65039; 전체 초기화</h2>
+      <p class="desc">편집 모드에서 수정한 모든 글&middot;사진을 처음 상태로 되돌립니다. (후기&middot;문의는 유지)</p>
+      <div class="row">
+        <button class="btn btn-danger" id="resetCms">글&middot;사진 수정 초기화</button>
+        <button class="btn btn-danger" id="logoutBtn">로그아웃</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var INDEX = 'index-4.html';
+
+  // 편집하는 동안(관리자 <-> 편집 화면)에는 로그인이 유지되고,
+  // '사이트 보기'로 홈페이지에 나갔다가 돌아오면 비밀번호를 다시 묻습니다.
+  function editing(){ try { return sessionStorage.getItem('em_edit_session') === '1'; } catch(e) { return false; } }
+  function startSession(){ try { sessionStorage.setItem('em_edit_session', '1'); } catch(e) {} }
+  function endSession(){ try { sessionStorage.removeItem('em_edit_session'); } catch(e) {} }
+  var authed = editing();
+
+  function getPw(){ return localStorage.getItem('em_pw') || '0813'; }
+  function getList(k){ try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch(e){ return []; } }
+  function esc(s){ var d = document.createElement('div'); d.textContent = String(s == null ? '' : s); return d.innerHTML; }
+  function loggedIn(){ return authed; }
+  function extendSession(){ authed = true; startSession(); }
+
+  var loginCard = document.getElementById('loginCard');
+  var panel = document.getElementById('panel');
+
+  function show(){
+    loginCard.style.display = loggedIn() ? 'none' : 'block';
+    panel.style.display = loggedIn() ? 'block' : 'none';
+    if (loggedIn()) { renderInquiries(); renderReviews(); }
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if (document.getElementById('pwInput').value === getPw()) {
+      extendSession(); show();
+    } else {
+      document.getElementById('loginMsg').style.display = 'block';
+    }
+  });
+
+  document.querySelectorAll('[data-edit]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      // 편집 화면에서 쓸 임시 권한(30분). 관리자 페이지는 다시 들어올 때마다 비밀번호를 묻습니다.
+      localStorage.setItem('em_admin_until', String(Date.now() + 30 * 60 * 1000));
+      location.href = btn.getAttribute('data-edit') + '?edit=1';
+    });
+  });
+
+  // ---- 문의 목록 ----
+  function renderInquiries(){
+    var list = getList('em_inquiries');
+    document.getElementById('inqCount').textContent = list.length + '건';
+    var box = document.getElementById('inqList');
+    if (!list.length) { box.innerHTML = '<div class="empty">아직 접수된 문의가 없어요.</div>'; return; }
+    box.innerHTML = '<table><tr><th>이름/연락처</th><th>내용</th><th></th></tr>' + list.map(function(q, i){
+      return '<tr><td><b>' + esc(q.name) + '</b><br><a href="tel:' + esc(q.phone) + '" style="color:var(--indigo);">' + esc(q.phone) + '</a><br><span style="font-size:12px;color:var(--muted);">' + esc(q.createdAt) + '</span></td>' +
+        '<td><span class="tag">' + esc(q.service) + '</span><br>' + esc(q.message || '(내용 없음)') + '</td>' +
+        '<td><button class="btn btn-danger btn-sm" data-del-inq="' + i + '">삭제</button></td></tr>';
+    }).join('') + '</table>';
+    box.querySelectorAll('[data-del-inq]').forEach(function(b){
+      b.addEventListener('click', function(){
+        if (!confirm('이 문의를 삭제할까요?')) return;
+        var l = getList('em_inquiries'); l.splice(Number(b.getAttribute('data-del-inq')), 1);
+        localStorage.setItem('em_inquiries', JSON.stringify(l)); renderInquiries();
+      });
+    });
+  }
+
+  // ---- 후기 관리 ----
+  function renderReviews(){
+    var list = getList('em_reviews');
+    document.getElementById('revCount').textContent = list.length + '건';
+    var box = document.getElementById('revList');
+    if (!list.length) { box.innerHTML = '<div class="empty">방문자가 남긴 후기가 아직 없어요.</div>'; return; }
+    box.innerHTML = '<table><tr><th>후기</th><th></th></tr>' + list.map(function(r, i){
+      var stars = ''; for (var s = 0; s < Number(r.stars || 5); s++) stars += '★';
+      return '<tr><td><span class="tag">' + esc(r.service) + '</span> <span class="stars">' + stars + '</span><br>' +
+        esc(r.text) + '<br><b>' + esc(r.name) + '</b> <span style="font-size:12px;color:var(--muted);">' + esc(r.createdAt) + '</span></td>' +
+        '<td><button class="btn btn-danger btn-sm" data-del-rev="' + i + '">삭제</button></td></tr>';
+    }).join('') + '</table>';
+    box.querySelectorAll('[data-del-rev]').forEach(function(b){
+      b.addEventListener('click', function(){
+        if (!confirm('이 후기를 삭제할까요?')) return;
+        var l = getList('em_reviews'); l.splice(Number(b.getAttribute('data-del-rev')), 1);
+        localStorage.setItem('em_reviews', JSON.stringify(l)); renderReviews();
+      });
+    });
+  }
+
+  // ---- 백업 ----
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    var data = {
+      em_cms: localStorage.getItem('em_cms'),
+      em_cms_img: localStorage.getItem('em_cms_img'),
+      em_reviews: localStorage.getItem('em_reviews'),
+      em_inquiries: localStorage.getItem('em_inquiries')
+    };
+    var blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    var d = new Date();
+    a.download = '사이트백업_' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + '.json';
+    a.click();
+    var m = document.getElementById('backupMsg'); m.textContent = '백업 파일이 저장되었습니다.'; m.style.display = 'block';
+  });
+  document.getElementById('importBtn').addEventListener('click', function(){ document.getElementById('importFile').click(); });
+  document.getElementById('importFile').addEventListener('change', function(){
+    var f = this.files[0]; if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function(){
+      try {
+        var data = JSON.parse(rd.result);
+        ['em_cms', 'em_cms_img', 'em_reviews', 'em_inquiries'].forEach(function(k){
+          if (data[k]) localStorage.setItem(k, data[k]);
+        });
+        var m = document.getElementById('backupMsg'); m.textContent = '복원되었습니다!'; m.style.display = 'block';
+        renderInquiries(); renderReviews();
+      } catch(e) { alert('올바른 백업 파일이 아니에요.'); }
+    };
+    rd.readAsText(f);
+  });
+
+  // ---- 비밀번호 ----
+  document.getElementById('pwForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = document.getElementById('newPw').value.trim();
+    if (v.length < 4) { alert('비밀번호는 4자 이상으로 해주세요.'); return; }
+    localStorage.setItem('em_pw', v);
+    document.getElementById('newPw').value = '';
+    document.getElementById('pwMsg').style.display = 'block';
+  });
+
+  // ---- 초기화 / 로그아웃 ----
+  document.getElementById('resetCms').addEventListener('click', function(){
+    if (confirm('편집 모드에서 수정한 모든 글·사진을 처음 상태로 되돌릴까요?')) {
+      localStorage.removeItem('em_cms'); localStorage.removeItem('em_cms_img');
+      alert('초기화되었습니다.');
+    }
+  });
+  document.getElementById('logoutBtn').addEventListener('click', function(){
+    authed = false; endSession(); localStorage.removeItem('em_admin_until'); show();
+  });
+
+  show();
+})();
+</script>
+</body>
+</html>
