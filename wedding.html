@@ -103,6 +103,7 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="컬러미 메이크업 아카데미 - 천안·아산 퍼스널컬러 메이크업 김은미">
 <meta name="twitter:image" content="https://www.colormemakeup.com/og-cover-2.jpg">
+<script src="content.js"></script><!-- 「웹에 반영하기」로 올린 내용. 페이지 그림이 그려지기 전에 읽혀야 깜빡이지 않는다. -->
 </head>
 <body>
 <header class="nav">
@@ -181,7 +182,26 @@
   }, {passive:true});
   toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-  function getJSON(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e) { return {}; } }
+  /* 내용은 두 군데에 있다.
+       ① content.js  — 「웹에 반영하기」로 올린 것. 손님에게 보이는 진짜 내용.
+       ② 이 브라우저  — 관리자가 고치는 중인 것. 아직 아무에게도 안 보인다.
+     고치는 중인 게 있으면 그것을, 없으면 반영된 것을 쓴다. */
+  function published(k){
+    var p = window.EM_PUBLISHED || {};
+    if (k === 'em_cms_img') return p.media || {};
+    return (p.data || {})[k];
+  }
+  function getJSON(k){
+    var pub = published(k), mine = null;
+    try { mine = JSON.parse(localStorage.getItem(k) || 'null'); } catch(e) {}
+    if (pub && mine && !Array.isArray(pub) && !Array.isArray(mine)) {
+      var out = {};
+      Object.keys(pub).forEach(function(x){ out[x] = pub[x]; });
+      Object.keys(mine).forEach(function(x){ out[x] = mine[x]; });
+      return out;
+    }
+    return mine || pub || {};
+  }
   var cms = getJSON('em_cms'), cmsImg = getJSON('em_cms_img');
   document.querySelectorAll('[data-cms]').forEach(function(el){
     var k = el.getAttribute('data-cms');
