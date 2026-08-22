@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>컬러미 홈페이지 고치는 법</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --paper:#FBF5F3;
+  --card:#FFFFFF;
+  --sand:#F6EAE7;
+  --ink:#24244A;
+  --body:#4A4560;
+  --soft:#6B6580;
+  --indigo:#3B3E8C;
+  --indigo-pale:#E6E7F5;
+  --pink:#EBB9C6;
+  --pink-pale:#F7DDE3;
+  --gold:#8A6C28;
+  --gold-pale:#F6EEDD;
+  --line:#ECE0E2;
+  --line-soft:#F5ECEE;
+  --hero-bg:#2C2F63;
+  --hero-fg:#F3F1FA;
+
+  --h1:clamp(1.75rem,6.5vw,2.6rem);
+  --h2:clamp(1.22rem,4.6vw,1.55rem);
+  --big:clamp(1.05rem,3.9vw,1.2rem);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#16141B;
+    --card:#1E1B26;
+    --sand:#272130;
+    --ink:#EDEAF4;
+    --body:#C6C0D4;
+    --soft:#9890AA;
+    --indigo:#A9ACEE;
+    --indigo-pale:#2A2A47;
+    --pink:#D79FAF;
+    --pink-pale:#33222A;
+    --gold:#D6B472;
+    --gold-pale:#332B1C;
+    --line:#332C3C;
+    --line-soft:#282232;
+    --hero-bg:#2A2A47;
+    --hero-fg:#EDEAF4;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#16141B;
+  --card:#1E1B26;
+  --sand:#272130;
+  --ink:#EDEAF4;
+  --body:#C6C0D4;
+  --soft:#9890AA;
+  --indigo:#A9ACEE;
+  --indigo-pale:#2A2A47;
+  --pink:#D79FAF;
+  --pink-pale:#33222A;
+  --gold:#D6B472;
+  --gold-pale:#332B1C;
+  --line:#332C3C;
+  --line-soft:#282232;
+  --hero-bg:#2A2A47;
+  --hero-fg:#EDEAF4;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--body);
+  font-family:'Noto Sans KR',system-ui,-apple-system,'Malgun Gothic',sans-serif;
+  font-size:17px;
+  line-height:1.9;
+  letter-spacing:-.01em;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.wrap{ max-width:40rem; margin:0 auto; padding:clamp(2rem,7vw,3.5rem) clamp(1.1rem,5vw,2rem) 4rem; }
+
+h1,h2,h3{ font-family:'Noto Serif KR',serif; color:var(--ink); margin:0; text-wrap:balance; font-weight:600; }
+p{ margin:0; }
+
+.hello{ margin-bottom:2.6rem; }
+.hello .tag{
+  display:inline-block; font-family:'Playfair Display',serif; font-style:normal;
+  font-size:.82rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--indigo); background:var(--indigo-pale);
+  padding:.32rem .85rem; border-radius:99px; margin-bottom:1.1rem;
+}
+h1{ font-size:var(--h1); line-height:1.35; letter-spacing:-.025em; }
+.hello p{ margin-top:1rem; font-size:var(--big); color:var(--soft); }
+
+.three{
+  background:var(--hero-bg); color:var(--hero-fg);
+  border-radius:18px; padding:clamp(1.4rem,5vw,2rem); margin-bottom:2.8rem;
+}
+.three h2{ color:inherit; font-size:var(--h2); margin-bottom:1.1rem; }
+.three dl{ margin:0; display:flex; flex-direction:column; gap:.9rem; }
+.three dt{ flex:none; width:4.2rem; font-size:.85rem; opacity:.75; }
+.three dd{ margin:0; font-weight:700; font-size:var(--big); min-width:0; overflow-wrap:anywhere; }
+.three .row{ display:flex; gap:.9rem; align-items:baseline; }
+@media(max-width:26rem){
+  /* 폰에서 주소가 길어 옆으로 밀린다 — 이름과 값을 위아래로 놓는다 */
+  .three .row{ flex-direction:column; gap:.1rem; }
+  .three dt{ width:auto; }
+  .three dd{ font-size:1rem; }
+}
+.three .small{ font-weight:400; font-size:.92rem; opacity:.82; display:block; margin-top:.15rem; }
+
+.job{
+  background:var(--card); border:1px solid var(--line);
+  border-radius:16px; padding:clamp(1.25rem,4.5vw,1.7rem); margin-bottom:1.1rem;
+}
+.job h2{ font-size:var(--h2); margin-bottom:.55rem; display:flex; gap:.6rem; align-items:baseline; }
+.job h2 .em{ font-size:1.15em; line-height:1; }
+.job > p{ color:var(--soft); font-size:.96rem; margin-bottom:1rem; }
+.job.star{ border-color:var(--indigo); border-width:2px; background:var(--sand); }
+
+ol.steps{ margin:0; padding:0; list-style:none; counter-reset:s; display:flex; flex-direction:column; gap:.7rem; }
+ol.steps li{ counter-increment:s; padding-left:2.1rem; position:relative; }
+ol.steps li::before{
+  content:counter(s); position:absolute; left:0; top:.28em;
+  width:1.5rem; height:1.5rem; border-radius:50%;
+  background:var(--indigo-pale); color:var(--indigo);
+  font-size:.8rem; font-weight:700; line-height:1.5rem; text-align:center;
+  font-family:'Noto Sans KR',sans-serif;
+}
+ol.steps b{ color:var(--ink); }
+
+ul.plain{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+ul.plain li{ padding-left:1.25rem; position:relative; }
+ul.plain li::before{
+  content:''; position:absolute; left:.1rem; top:.85em;
+  width:.4rem; height:.4rem; border-radius:50%; background:var(--pink);
+}
+ul.plain b{ color:var(--ink); }
+
+.key{
+  display:inline-block; font-weight:700; color:var(--indigo);
+  background:var(--indigo-pale); padding:.1rem .45rem; border-radius:6px; letter-spacing:.02em;
+}
+
+.tip{
+  margin-top:1.1rem; background:var(--gold-pale); border-radius:12px;
+  padding:.85rem 1rem; font-size:.92rem; color:var(--ink);
+}
+.tip b{ color:var(--gold); }
+
+.last{ margin-top:2.4rem; border-top:2px solid var(--ink); padding-top:1.8rem; }
+.last h2{ font-size:var(--h2); margin-bottom:1.1rem; }
+.last .note{ font-size:.95rem; color:var(--soft); margin-top:1.4rem; }
+
+footer{ margin-top:2.6rem; padding-top:1.2rem; border-top:1px solid var(--line-soft);
+        font-size:.85rem; color:var(--soft); text-align:center; }
+
+@media (prefers-reduced-motion:reduce){ *{ transition:none!important; animation:none!important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="hello">
+    <span class="tag">Color Me</span>
+    <h1>이제 홈페이지 글을<br>직접 고치실 수 있습니다.</h1>
+    <p>컴퓨터를 잘 몰라도 괜찮습니다. 글을 눌러서 고치고, 단추 하나 누르면 끝입니다.</p>
+  </header>
+
+  <section class="three">
+    <h2>딱 세 가지만 기억하세요</h2>
+    <dl>
+      <div class="row">
+        <dt>들어가는 곳</dt>
+        <dd>www.colormemakeup.com/admin.html
+          <span class="small">홈페이지 주소 뒤에 <b>/admin.html</b> 을 붙이면 됩니다</span></dd>
+      </div>
+      <div class="row">
+        <dt>비밀번호</dt>
+        <dd>0813</dd>
+      </div>
+      <div class="row">
+        <dt>마지막에</dt>
+        <dd>「웹에 반영하기」
+          <span class="small">이걸 눌러야 손님 화면에도 보입니다</span></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="job">
+    <h2><span class="em">📱</span>들어가기</h2>
+    <p>휴대폰으로도 되고 컴퓨터로도 됩니다.</p>
+    <ol class="steps">
+      <li>인터넷 주소창에 <b>www.colormemakeup.com/admin.html</b> 을 칩니다.</li>
+      <li>비밀번호 <span class="key">0813</span> 을 넣고 <b>로그인</b>.</li>
+    </ol>
+    <div class="tip"><b>편하게 쓰시려면</b> — 휴대폰에서 이 화면을 열고 「홈 화면에 추가」를 해두시면,
+      다음부터는 앱처럼 눌러서 바로 들어가실 수 있습니다.</div>
+  </section>
+
+  <section class="job">
+    <h2><span class="em">✏️</span>글과 사진 고치기</h2>
+    <p>메인·퍼스널컬러·자격과정·골격진단·1:1클래스·웨딩·출강·인터뷰 — 각 페이지의 제목과 소개글을 고치실 수 있습니다.</p>
+    <ol class="steps">
+      <li><b>「사이트 내용·사진 수정」</b>에서 고치실 페이지 단추를 누릅니다.</li>
+      <li>홈페이지가 열립니다. <b>고칠 글을 손가락으로 톡 누르면</b> 바로 고칠 수 있습니다.</li>
+      <li>사진은 사진 위의 <b>📷 사진 교체</b> 단추로 바꿉니다.</li>
+      <li>다 하셨으면 화면 아래 <b>「저장」</b>을 <b>꼭</b> 누릅니다.</li>
+    </ol>
+    <div class="tip"><b>저장을 눌러야 남습니다.</b> 「저장 안 하고 나가기」를 누르면 고치신 게 사라집니다.<br>
+      사진은 <b>가로 사진 자리엔 가로, 세로 자리엔 세로</b>를 넣으셔야 잘리지 않습니다.</div>
+  </section>
+
+  <section class="job">
+    <h2><span class="em">⭐</span>후기 관리</h2>
+    <p>손님 후기를 등록하시면 홈페이지 후기 자리에 나타납니다.</p>
+    <ol class="steps">
+      <li><b>「방문자 후기 관리」</b>에서 내용·이름·별점을 적습니다.</li>
+      <li>등록한 후기는 목록에서 <b>고치거나 지우실</b> 수 있습니다.</li>
+    </ol>
+  </section>
+
+  <section class="job star">
+    <h2><span class="em">🌐</span>웹에 반영하기 — 가장 중요합니다</h2>
+    <p>여기까지 고치신 것은 <b>원장님 화면에만</b> 보입니다. 이 단추를 눌러야 손님에게도 보입니다.</p>
+    <ol class="steps">
+      <li>관리자 화면 <b>맨 위</b>의 <b>「웹에 반영하기」</b>를 누릅니다.</li>
+      <li>비밀번호 <span class="key">0813</span> 을 한 번 더 넣습니다.</li>
+      <li><b>「반영했습니다」</b>가 뜨면 끝입니다.</li>
+      <li><b>1~2분</b> 뒤 홈페이지를 새로고침하면 바뀐 내용이 보입니다.</li>
+    </ol>
+    <div class="tip"><b>마음껏 고쳐 보셔도 됩니다.</b> 반영을 누르기 전까지는
+      아무에게도 보이지 않습니다. 마음에 드실 때 누르시면 됩니다.</div>
+  </section>
+
+  <section class="job">
+    <h2><span class="em">↩️</span>되돌리고 싶을 때</h2>
+    <ul class="plain">
+      <li><b>큰 수정을 하시기 전에</b> — 「백업 · 복원」에서 <b>백업 파일 내려받기</b>를 먼저 받아 두시면
+        언제든 그 시점으로 돌아갈 수 있습니다.</li>
+      <li><b>되돌리기</b> — 받아 둔 백업 파일을 「복원」으로 불러오시면 됩니다.</li>
+      <li><b>편집 중이라면</b> — 「저장 안 하고 나가기」를 누르면 그때까지 고친 게 취소됩니다.</li>
+    </ul>
+  </section>
+
+  <section class="last">
+    <h2>이것만은 기억해 주세요</h2>
+    <ul class="plain">
+      <li><b>고친 뒤에는 꼭 「웹에 반영하기」.</b> 이걸 안 누르면 손님 화면은 그대로입니다.</li>
+      <li><b>비밀번호는 알려주지 마세요.</b> 바꾸시려면 <b>「비밀번호 변경」</b>에서 바꾸실 수 있습니다.</li>
+      <li><b>메뉴와 아래쪽 연락처</b>는 여기서 못 고칩니다. 그 부분은 말씀해 주시면 고쳐 드립니다.</li>
+    </ul>
+    <p class="note">해보시다가 막히시거나 이상하면 <b>그 화면을 그대로 캡처해서</b> 보내 주세요.
+      뭘 잘못 누르셔도 홈페이지는 망가지지 않습니다. 편하게 만져 보셔도 됩니다.</p>
+  </section>
+
+
+  <p style="text-align:center;margin-top:2rem">
+    <a href="admin.html" style="display:inline-block;padding:.9rem 1.8rem;border-radius:99px;
+       background:var(--hero-bg);color:var(--hero-fg);text-decoration:none;font-weight:700;font-size:1rem">
+      관리자 화면으로 가기 &rarr;</a>
+  </p>
+
+  <footer>컬러미 메이크업 아카데미 · www.colormemakeup.com</footer>
+</div>
+
+</body>
+</html>
